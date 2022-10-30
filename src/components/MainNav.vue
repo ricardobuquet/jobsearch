@@ -8,7 +8,7 @@
           company
         }}</a>
 
-        <nav class="h-full m-12">
+        <nav class="h-full ml-12">
           <ul class="flex h-full p-0 m-0 list-none">
             <li
               v-for="menuItem in menuItems"
@@ -16,7 +16,7 @@
               class="h-full ml-9 first:ml-0"
               data-test="main-nav-list-item"
             >
-              <a href="" class="flex items-center h-full py-2.5">{{
+              <a href="/" class="flex items-center h-full py-2.5">{{
                 menuItem
               }}</a>
             </li>
@@ -24,10 +24,23 @@
         </nav>
 
         <div class="flex items-center h-full ml-auto">
+          <action-button
+            text="some text 1"
+            type="secondary"
+            data-test="login-button2"
+          />
           <profile-image v-if="isLoggedIn" data-test="profile-image" />
-          <action-button v-else data-test="login-button" @:click="loginUser" />
+          <action-button
+            v-else
+            text="some text"
+            type="primary"
+            data-test="login-button"
+            @click="loginUser"
+          />
         </div>
       </div>
+
+      <subnav v-if="isLoggedIn" data-test="subnav" />
     </div>
   </header>
 </template>
@@ -35,12 +48,14 @@
 <script>
 import ActionButton from "@/components/ActionButton.vue";
 import ProfileImage from "@/components/ProfileImage.vue";
+import Subnav from "@/components/Subnav.vue";
 
 export default {
   name: "MainNav",
   components: {
     ActionButton,
     ProfileImage,
+    Subnav,
   },
   data() {
     return {
